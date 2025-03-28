@@ -84,6 +84,13 @@ module BrightcoveCmsApi
       send_response
     end
 
+    # get captions
+    def captions(video_id)
+      check_token_expires
+      @response = HTTP.auth("Bearer #{@token}").get("#{API_URL}/#{@account_id}/videos/#{video_id}/text_tracks")
+      send_response
+    end
+
     private
 
       def set_authtoken
