@@ -18,7 +18,7 @@ module BrightcoveCmsApi
     def ingest_request(video_id, params)
       check_token_expires
       @response = HTTP.auth("Bearer #{@token}").post(
-        "#{API_URL}/#{@account_id}/videos/#{video_id}/ingest_request",
+        "#{API_URL}/#{@account_id}/videos/#{video_id}/ingest-request",
         { json: params }
       )
       send_response
