@@ -1,11 +1,11 @@
 require "http"
 require_relative "errors"
 
-API_URL = "https://ingest.api.brightcove.com/v1/accounts"
-OAUTH_ENDPOINT = "https://oauth.brightcove.com/v4/access_token"
-
 module BrightcoveCmsApi
   class Ingest
+
+    API_URL = "https://ingest.api.brightcove.com/v1/accounts"
+    OAUTH_ENDPOINT = "https://oauth.brightcove.com/v4/access_token"
 
     def initialize(account_id:, client_id:, client_secret:)
       @account_id = account_id
