@@ -84,11 +84,28 @@ module BrightcoveCmsApi
       send_response
     end
 
-    # get captions
-    def captions(video_id)
+    # Ingeset Request
+    def ingest_request(video_id, params)
       check_token_expires
-      @response = HTTP.auth("Bearer #{@token}").get("#{API_URL}/#{@account_id}/videos/#{video_id}/text_tracks")
+      @response = HTTP.auth("Bearer #{@token}").post(
+        "#{API_URL}/#{@account_id}/videos/#{video_id}/ingest_request",
+        { json: params }
+      )
       send_response
+    end
+
+    def request_auto_captions(video_id, srclang:, kind:, label:, default: false)
+      params = {
+        transcriptions: [
+          {
+            srclang: srclang,
+            kind: kind,
+            label: label,
+            default: default
+          }
+        ]
+      }
+      ingest_request(video_id, params)
     end
 
     private
